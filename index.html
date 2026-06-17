@@ -12,81 +12,77 @@
   :root{
     --ink:#14181F; --panel:#1B2129; --panel-2:#212A34; --border:#2A333F;
     --text:#E8ECF1; --muted:#8A95A3; --faint:#5B6571;
-    --accent:#E0A458; --accent-press:#C98F44; --play:#5BB3A6;
-    --radius:12px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    --accent:#E0A458; --accent-press:#C98F44;
+    --radius:12px; --side-w:300px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0; background:var(--ink); color:var(--text);
     font-family:"Inter",system-ui,sans-serif; font-size:15px; line-height:1.5;
-    display:grid; grid-template-columns:300px 1fr; height:100vh; overflow:hidden;
+    display:grid; grid-template-columns:var(--side-w) 6px 1fr; height:100vh; overflow:hidden;
   }
-  @media (max-width:760px){ body{grid-template-columns:1fr; grid-template-rows:auto 1fr; overflow:auto; height:auto; min-height:100vh} }
+  @media (max-width:760px){ body{grid-template-columns:1fr; grid-template-rows:auto 1fr; overflow:auto; height:auto; min-height:100vh} .resizer{display:none} }
 
-  /* sidebar */
+  .resizer{cursor:col-resize; background:var(--border)}
+  .resizer:hover{background:var(--accent)}
+
   .side{background:var(--panel); border-right:1px solid var(--border); display:flex; flex-direction:column; min-height:0}
   .brand{display:flex; align-items:center; gap:10px; padding:20px 20px 16px; border-bottom:1px solid var(--border)}
-  .brand svg{flex:0 0 auto}
   .brand h1{font-family:"Space Grotesk",sans-serif; font-size:17px; font-weight:600; letter-spacing:-.01em; margin:0}
   .brand span{font-size:11px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
   .search{padding:14px 16px; border-bottom:1px solid var(--border)}
-  .search input{
-    width:100%; background:var(--ink); border:1px solid var(--border); color:var(--text);
-    border-radius:9px; padding:10px 12px; font:inherit; outline:none;
-  }
+  .search input{width:100%; background:var(--ink); border:1px solid var(--border); color:var(--text); border-radius:9px; padding:10px 12px; font:inherit; outline:none}
   .search input:focus{border-color:var(--accent)}
   .courses{flex:1; overflow:auto; padding:8px}
   .courses .label{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--faint); padding:10px 12px 6px}
-  .course{
-    display:flex; align-items:center; gap:10px; width:100%; text-align:left;
-    background:none; border:0; color:var(--text); font:inherit; cursor:pointer;
-    padding:9px 12px; border-radius:9px;
-  }
+  .course{display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left; background:none; border:0; color:var(--text); font:inherit; cursor:pointer; padding:9px 12px; border-radius:9px}
   .course:hover{background:var(--panel-2)}
   .course.active{background:var(--panel-2); color:var(--accent)}
-  .course svg{flex:0 0 auto; opacity:.7}
-  .course span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-  .side-foot{padding:14px 16px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:8px}
+  .course svg{flex:0 0 auto; opacity:.7; margin-top:2px}
+  .course span{overflow-wrap:anywhere; line-height:1.35}
+  .side-foot{padding:14px 16px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
   .linkbtn{background:none;border:0;color:var(--accent);font:inherit;cursor:pointer;padding:0}
   .linkbtn:hover{text-decoration:underline}
 
-  /* main */
-  .main{min-height:0; overflow:auto; padding:28px 32px 48px}
-  .topline{display:flex; align-items:baseline; gap:14px; margin-bottom:22px; flex-wrap:wrap}
-  .topline h2{font-family:"Space Grotesk",sans-serif; font-size:24px; font-weight:600; letter-spacing:-.02em; margin:0}
+  .main{min-height:0; overflow:auto; padding:24px 32px 48px}
+  .crumbs{display:flex; align-items:center; gap:6px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin-bottom:18px}
+  .crumbs button{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:0}
+  .crumbs button:hover{color:var(--accent)}
+  .crumbs .sep{color:var(--faint)}
+  .crumbs .cur{color:var(--text)}
+  .topline{display:flex; align-items:baseline; gap:14px; margin-bottom:18px; flex-wrap:wrap}
+  .topline h2{font-family:"Space Grotesk",sans-serif; font-size:23px; font-weight:600; letter-spacing:-.02em; margin:0}
   .topline .count{color:var(--muted); font-size:13px}
 
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px}
-  .card{
-    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
-    overflow:hidden; cursor:pointer; text-align:left; padding:0; color:inherit; font:inherit;
-    transition:border-color .15s, transform .15s;
-  }
+  .grid.folders{grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); margin-bottom:26px}
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; text-align:left; padding:0; color:inherit; font:inherit; transition:border-color .15s, transform .15s}
   .card:hover{border-color:var(--accent); transform:translateY(-2px)}
   .thumb{aspect-ratio:16/9; background:var(--panel-2); position:relative; display:flex; align-items:center; justify-content:center}
   .thumb img{width:100%; height:100%; object-fit:cover; display:block}
   .thumb .play{position:absolute; width:44px; height:44px; border-radius:50%; background:rgba(20,24,31,.7); display:flex; align-items:center; justify-content:center}
   .card .name{padding:11px 13px; font-size:14px; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+  .card .vpath{padding:0 13px 11px; font-size:12px; color:var(--faint); margin-top:-4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .folder-card{display:flex; align-items:center; gap:12px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer; text-align:left; color:inherit; font:inherit; padding:14px 15px; transition:border-color .15s, transform .15s}
+  .folder-card:hover{border-color:var(--accent); transform:translateY(-2px)}
+  .folder-card .fc-icon{flex:0 0 auto; color:var(--accent)}
+  .folder-card .fc-name{font-size:14px; line-height:1.3; overflow-wrap:anywhere}
+  .folder-card .fc-sub{font-size:12px; color:var(--faint)}
 
-  /* player */
   .player{max-width:980px}
   .backbtn{background:none;border:1px solid var(--border);color:var(--muted);font:inherit;cursor:pointer;border-radius:8px;padding:7px 12px;margin-bottom:16px}
   .backbtn:hover{color:var(--text);border-color:var(--accent)}
   .frame{aspect-ratio:16/9; width:100%; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); background:#000}
   .frame iframe{width:100%; height:100%; border:0}
   .player h2{font-family:"Space Grotesk",sans-serif; font-weight:600; margin:18px 0 4px; letter-spacing:-.01em}
+  .player .vpath{color:var(--muted); font-size:13px}
 
-  /* states */
   .state{display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; gap:14px; padding:40px}
   .state h3{font-family:"Space Grotesk",sans-serif; font-weight:600; margin:0; font-size:20px}
-  .state p{color:var(--muted); margin:0; max-width:420px}
-  .btn{
-    background:var(--accent); color:#1A140A; border:0; border-radius:10px; font:inherit; font-weight:600;
-    padding:11px 20px; cursor:pointer;
-  }
-  .btn:hover{background:var(--accent-press)}
-  .btn:active{transform:translateY(1px)}
+  .state p{color:var(--muted); margin:0; max-width:440px}
+  .btn{background:var(--accent); color:#1A140A; border:0; border-radius:10px; font:inherit; font-weight:600; padding:11px 20px; cursor:pointer}
+  .btn:hover{background:var(--accent-press)} .btn:active{transform:translateY(1px)}
   .err{color:#E98F8F; background:rgba(233,143,143,.08); border:1px solid rgba(233,143,143,.25); border-radius:10px; padding:12px 14px; font-size:14px; max-width:520px}
   .spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -97,20 +93,6 @@
 </head>
 <body>
 
-  <!-- ===================== CONFIGURACIÓN ===================== -->
-  <script>
-    // 1) Pega aquí tu Client ID de OAuth (Google Cloud Console)
-    const CLIENT_ID = '314287805294-tva4np726d008slj2nlnd453ndvej7rg.apps.googleusercontent.com';
-
-    // 2) (Opcional) ID de la carpeta raíz que contiene tus cursos.
-    //    Déjalo vacío para listar las carpetas de la raíz de tu Drive.
-    //    El ID está en la URL de la carpeta: drive.google.com/drive/folders/ESTE_ID
-    const ROOT_FOLDER_ID = '1Y14IDhkE5n-s0WZrDDlyWb-X_Yqra_aQ';
-
-    const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
-  </script>
-  <!-- ======================================================== -->
-
   <aside class="side">
     <div class="brand">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -118,221 +100,227 @@
         <path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/>
         <path d="M6 21h12" stroke="#E0A458" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
-      <div>
-        <h1>Biblioteca</h1>
-        <span>cursos en vídeo</span>
-      </div>
+      <div><h1>Biblioteca</h1><span>cursos en vídeo</span></div>
     </div>
-
-    <div class="search">
-      <input id="searchBox" type="search" placeholder="Buscar por nombre de archivo…" autocomplete="off" disabled>
-    </div>
-
-    <nav class="courses" id="courseList">
-      <div class="label">Cursos</div>
-    </nav>
-
+    <div class="search"><input id="searchBox" type="search" placeholder="Buscar en todos los cursos…" autocomplete="off" disabled></div>
+    <nav class="courses" id="courseList"><div class="label">Cursos</div></nav>
     <div class="side-foot">
       <span id="userState">Sin conectar</span>
-      <button class="linkbtn hidden" id="signOut">Salir</button>
+      <span style="display:flex;gap:12px">
+        <button class="linkbtn hidden" id="refreshBtn">Actualizar</button>
+        <button class="linkbtn hidden" id="signOut">Salir</button>
+      </span>
     </div>
   </aside>
 
-  <main class="main" id="main">
-    <!-- Pantalla de conexión por defecto -->
-    <div class="state" id="welcome">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-        <rect x="2.5" y="4" width="19" height="14" rx="2.5" stroke="#E0A458" stroke-width="1.4"/>
-        <path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/>
-      </svg>
-      <h3>Conecta tu Drive</h3>
-      <p>Accede para listar tus carpetas de cursos y reproducir los vídeos. Solo se pide permiso de lectura.</p>
-      <button class="btn" id="signIn">Conectar con Google</button>
-      <div class="err hidden" id="cfgErr">Falta configurar <strong>CLIENT_ID</strong> en el bloque de configuración del archivo.</div>
-    </div>
-  </main>
+  <div class="resizer" id="resizer" title="Arrastra para redimensionar"></div>
+
+  <main class="main" id="main"></main>
 
 <script>
-/* ---------------- Estado y OAuth (GIS, modelo token) ---------------- */
-let tokenClient = null;
-let accessToken = null;
-let hasConsented = false;
-let gisReady = false;
+/* ======================= AJUSTES (rellena una vez) =======================
+   No son secretos: el Client ID va siempre en el navegador y el ID de
+   carpeta no da acceso por sí solo. Ponlos aquí y todos tus usuarios
+   abren la URL sin configurar nada.                                         */
+const HARD_CLIENT_ID = '314287805294-tva4np726d008slj2nlnd453ndvej7rg.apps.googleusercontent.com';   // p.ej. '123-abc.apps.googleusercontent.com'
+const HARD_ROOT      = '1Y14IDhkE5n-s0WZrDDlyWb-X_Yqra_aQ';   // ID de tu carpeta compartida de cursos
+const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+/* ========================================================================= */
 
-function initGis(){
-  if (gisReady || !window.google || !google.accounts) return;
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: SCOPES,
-    callback: (resp) => {
-      if (resp.error) { showError('No se pudo autorizar el acceso. Revisa los orígenes autorizados en Google Cloud.'); return; }
-      accessToken = resp.access_token;
-      hasConsented = true;
-      onSignedIn();
-    },
-  });
-  gisReady = true;
-}
-// El script de GIS es async: reintenta hasta que cargue
-const gisTimer = setInterval(() => { if (window.google && google.accounts){ initGis(); clearInterval(gisTimer); } }, 120);
-
-function signIn(){
-  if (CLIENT_ID.startsWith('TU_CLIENT_ID')) { document.getElementById('cfgErr').classList.remove('hidden'); return; }
-  if (!tokenClient) { showError('Google Identity aún no ha cargado. Espera un momento e inténtalo de nuevo.'); return; }
-  tokenClient.requestAccessToken({ prompt: hasConsented ? '' : 'consent' });
-}
-function signOut(){
-  if (accessToken && google.accounts) google.accounts.oauth2.revoke(accessToken, ()=>{});
-  accessToken = null; hasConsented = false;
-  location.reload();
-}
-
-/* ---------------- Llamadas a la Drive API ---------------- */
-async function drive(params, retry = true){
-  const url = new URL('https://www.googleapis.com/drive/v3/files');
-  Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
-  const r = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
-  if (r.status === 401 && retry){
-    // token caducado → pedir uno nuevo en silencio y reintentar
-    await new Promise((res) => {
-      const cb = tokenClient.callback;
-      tokenClient.callback = (resp) => { tokenClient.callback = cb; if(!resp.error) accessToken = resp.access_token; res(); };
-      tokenClient.requestAccessToken({ prompt: '' });
-    });
-    return drive(params, false);
-  }
-  if (!r.ok) throw new Error('Drive API ' + r.status);
-  return r.json();
-}
-
-const esc = (s) => s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-
-function listCourses(){
-  const parent = ROOT_FOLDER_ID ? `'${ROOT_FOLDER_ID}'` : `'root'`;
-  return drive({
-    q: `${parent} in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
-    fields: 'files(id,name)', orderBy: 'name', pageSize: '200',
-  });
-}
-function listVideos(folderId){
-  return drive({
-    q: `'${folderId}' in parents and mimeType contains 'video/' and trashed=false`,
-    fields: 'files(id,name,thumbnailLink)', orderBy: 'name', pageSize: '200',
-  });
-}
-function searchVideos(term){
-  return drive({
-    q: `name contains '${esc(term)}' and mimeType contains 'video/' and trashed=false`,
-    fields: 'files(id,name,thumbnailLink)', orderBy: 'name', pageSize: '100',
-  });
-}
-
-/* ---------------- UI ---------------- */
 const $ = (id) => document.getElementById(id);
 const main = $('main');
+const cfg = { clientId:()=> HARD_CLIENT_ID.trim(), root:()=> (HARD_ROOT.trim() || 'root') };
 
-function onSignedIn(){
-  $('welcome')?.classList.add('hidden');
-  $('userState').textContent = 'Conectado';
-  $('signOut').classList.remove('hidden');
-  $('searchBox').disabled = false;
-  loadCourses();
+let tree = null;       // árbol completo de la biblioteca
+let flat = [];         // índice plano de vídeos para buscar
+let currentPath = [];  // pila de nodos para navegar
+let returnFn = null;   // a dónde vuelve el botón del reproductor
+
+/* ---------- token persistente ---------- */
+function saveToken(t,s){ localStorage.setItem('bc_token', JSON.stringify({t, e:Date.now()+(s||3600)*1000})); }
+function loadToken(){ try{ const o=JSON.parse(localStorage.getItem('bc_token')); if(o && o.e-Date.now()>60000) return o.t; }catch(e){} return null; }
+function clearToken(){ localStorage.removeItem('bc_token'); }
+/* ---------- caché del árbol ---------- */
+function cacheTree(t){ try{ localStorage.setItem('bc_tree_'+cfg.root(), JSON.stringify(t)); }catch(e){} }
+function loadCachedTree(){ try{ return JSON.parse(localStorage.getItem('bc_tree_'+cfg.root())); }catch(e){ return null; } }
+
+/* ---------- barra lateral redimensionable ---------- */
+(()=>{ const w=localStorage.getItem('bc_side_w'); if(w) document.documentElement.style.setProperty('--side-w', w); })();
+(()=>{ const rz=$('resizer'); let drag=false;
+  rz.addEventListener('pointerdown', e=>{drag=true; rz.setPointerCapture(e.pointerId); document.body.style.userSelect='none';});
+  window.addEventListener('pointermove', e=>{ if(!drag) return; document.documentElement.style.setProperty('--side-w', Math.min(700,Math.max(220,e.clientX))+'px'); });
+  window.addEventListener('pointerup', ()=>{ if(!drag) return; drag=false; document.body.style.userSelect=''; localStorage.setItem('bc_side_w', getComputedStyle(document.documentElement).getPropertyValue('--side-w').trim()); });
+})();
+
+/* ---------- OAuth (GIS, modelo token) ---------- */
+let tokenClient=null, accessToken=null, hasConsented=false, pending=null;
+function whenGisReady(cb){ const t=setInterval(()=>{ if(window.google&&google.accounts){ clearInterval(t); cb(); } },100); }
+function initTokenClient(){
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: cfg.clientId(), scope: SCOPES,
+    callback:(r)=>{ if(r.error){ if(pending){pending.reject(r); pending=null;} return; }
+      accessToken=r.access_token; hasConsented=true; saveToken(r.access_token, r.expires_in);
+      const p=pending; pending=null; if(p) p.resolve(); },
+  });
 }
+function requestToken(silent){ return new Promise((res,rej)=>{ pending={resolve:res,reject:rej}; tokenClient.requestAccessToken({prompt: silent?'':(hasConsented?'':'consent')}); }); }
 
-async function loadCourses(){
-  const list = $('courseList');
-  list.innerHTML = '<div class="label">Cursos</div>';
-  try{
-    const { files } = await listCourses();
-    if (!files.length){
-      list.insertAdjacentHTML('beforeend', '<div style="padding:12px;color:var(--muted);font-size:13px">No hay carpetas aquí. Ajusta ROOT_FOLDER_ID.</div>');
-      return;
+/* ---------- Drive API + límite de concurrencia ---------- */
+async function drive(params, retry=true){
+  const url=new URL('https://www.googleapis.com/drive/v3/files');
+  Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
+  const r=await fetch(url,{headers:{Authorization:'Bearer '+accessToken}});
+  if(r.status===401 && retry){ try{ await requestToken(true); }catch(e){ clearToken(); showWelcome(); throw new Error('Sesión caducada.'); } return drive(params,false); }
+  if(!r.ok) throw new Error('Drive API '+r.status);
+  return r.json();
+}
+function limiter(max){ let active=0; const q=[]; const next=()=>{ if(active>=max||!q.length) return; active++; const {fn,res,rej}=q.shift(); fn().then(res,rej).finally(()=>{active--; next();}); }; return fn=>new Promise((res,rej)=>{ q.push({fn,res,rej}); next(); }); }
+const limit = limiter(6);
+
+async function listChildren(folderId){
+  const folders=[], videos=[]; let pageToken;
+  do{
+    const params={ q:`'${folderId}' in parents and trashed=false and (mimeType='application/vnd.google-apps.folder' or mimeType contains 'video/')`,
+      fields:'nextPageToken, files(id,name,mimeType,thumbnailLink)', orderBy:'folder,name', pageSize:'1000' };
+    if(pageToken) params.pageToken=pageToken;
+    const r=await drive(params);
+    for(const f of (r.files||[])){
+      if(f.mimeType==='application/vnd.google-apps.folder') folders.push({id:f.id,name:f.name});
+      else videos.push({id:f.id,name:f.name,thumb:f.thumbnailLink});
     }
-    files.forEach(f => {
-      const b = document.createElement('button');
-      b.className = 'course'; b.dataset.id = f.id;
-      b.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.5"/></svg><span>${f.name}</span>`;
-      b.onclick = () => openCourse(f.id, f.name, b);
-      list.appendChild(b);
-    });
-  }catch(e){ showError('No se pudieron cargar las carpetas. ' + e.message); }
+    pageToken=r.nextPageToken;
+  } while(pageToken);
+  return {folders,videos};
 }
 
-function setActive(btn){
-  document.querySelectorAll('.course').forEach(c => c.classList.remove('active'));
-  btn?.classList.add('active');
+let crawled=0;
+async function crawl(id,name){
+  const {folders,videos}=await limit(()=>listChildren(id));
+  crawled++; const el=$('crawlStatus'); if(el) el.textContent=`Indexando… ${crawled} carpetas`;
+  const node={id,name,videos,folders:[]};
+  node.folders=await Promise.all(folders.map(f=>crawl(f.id,f.name)));
+  return node;
+}
+function buildIndex(node, path, out){
+  for(const v of node.videos) out.push({id:v.id, name:v.name, thumb:v.thumb, path:path.join(' / ')});
+  for(const f of node.folders) buildIndex(f,[...path,f.name],out);
+  return out;
 }
 
-async function openCourse(id, name, btn){
-  setActive(btn);
-  showLoading();
-  try{
-    const { files } = await listVideos(id);
-    renderGrid(name, files);
-  }catch(e){ showError('No se pudieron cargar los vídeos. ' + e.message); }
+/* ---------- flujo ---------- */
+function boot(){
+  if(!cfg.clientId()){ main.innerHTML=`<div class="state"><h3>Falta configurar la app</h3><div class="err">El desarrollador debe rellenar <b>HARD_CLIENT_ID</b> (y <b>HARD_ROOT</b>) en el archivo.</div></div>`; return; }
+  whenGisReady(()=>{ initTokenClient(); const t=loadToken(); if(t){ accessToken=t; hasConsented=true; onSignedIn(); } else showWelcome(); });
 }
+function showWelcome(){
+  $('userState').textContent='Sin conectar'; $('signOut').classList.add('hidden'); $('refreshBtn').classList.add('hidden'); $('searchBox').disabled=true;
+  main.innerHTML=`<div class="state">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4" width="19" height="14" rx="2.5" stroke="#E0A458" stroke-width="1.4"/><path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/></svg>
+    <h3>Accede para ver los cursos</h3>
+    <p>Inicia sesión con tu cuenta de Google (la que te dieron acceso). Solo lectura. La sesión se recuerda al recargar.</p>
+    <button class="btn" id="connectBtn">Acceder con Google</button></div>`;
+  $('connectBtn').onclick=()=> requestToken(false).then(onSignedIn).catch(()=> showError('No se pudo acceder. Revisa que tu cuenta tenga acceso y esté autorizada.'));
+}
+async function onSignedIn(){
+  $('userState').textContent='Conectado'; $('signOut').classList.remove('hidden'); $('refreshBtn').classList.remove('hidden'); $('searchBox').disabled=false;
+  const cached=loadCachedTree();
+  if(cached){ useTree(cached); } else { await doCrawl(); }
+}
+async function doCrawl(){
+  main.innerHTML=`<div class="state"><div class="spinner"></div><p id="crawlStatus">Indexando biblioteca…</p></div>`;
+  crawled=0;
+  try{ const t=await crawl(cfg.root(),'Cursos'); cacheTree(t); useTree(t); }
+  catch(e){ showError('No se pudo leer la biblioteca. '+e.message); }
+}
+function useTree(t){ tree=t; flat=buildIndex(t,[],[]); renderSidebar(); showHome(); }
+
+function renderSidebar(){
+  const list=$('courseList'); list.innerHTML='<div class="label">Cursos</div>';
+  if(!tree.folders.length){ list.insertAdjacentHTML('beforeend','<div style="padding:12px;color:var(--muted);font-size:13px">No hay carpetas. Revisa el acceso a la carpeta compartida.</div>'); return; }
+  tree.folders.forEach(c=>{
+    const b=document.createElement('button'); b.className='course'; b.title=c.name;
+    b.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.5"/></svg><span></span>`;
+    b.querySelector('span').textContent=c.name;
+    b.onclick=()=> openFolder([c], b);
+    list.appendChild(b);
+  });
+}
+function setActive(btn){ document.querySelectorAll('.course').forEach(c=>c.classList.remove('active')); if(btn) btn.classList.add('active'); }
+
+function showHome(){
+  setActive(null); currentPath=[]; returnFn=showHome;
+  main.innerHTML=`<div class="state"><h3>Elige un curso</h3><p>Selecciona un curso a la izquierda para ver sus carpetas y vídeos, o busca por nombre en toda la biblioteca.</p></div>`;
+}
+
+function openFolder(pathNodes, sidebarBtn){
+  currentPath=pathNodes; returnFn=()=>openFolder(pathNodes);
+  if(sidebarBtn) setActive(sidebarBtn);
+  else { // marcar el curso raíz de esta ruta como activo en la barra
+    const rootName=pathNodes[0].name;
+    document.querySelectorAll('.course').forEach(c=>c.classList.toggle('active', c.title===rootName));
+  }
+  const node=pathNodes[pathNodes.length-1];
+
+  // migas de pan
+  let crumbs=`<div class="crumbs"><button onclick="showHome()">Cursos</button>`;
+  pathNodes.forEach((n,i)=>{ const last=i===pathNodes.length-1;
+    crumbs+=`<span class="sep">/</span>`+(last?`<span class="cur">${escHtml(n.name)}</span>`:`<button data-i="${i}">${escHtml(n.name)}</button>`);
+  });
+  crumbs+=`</div>`;
+
+  const folderCards=node.folders.map((f,i)=>`<button class="folder-card" data-fi="${i}">
+    <span class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.6"/></svg></span>
+    <span><span class="fc-name">${escHtml(f.name)}</span><br><span class="fc-sub">${countVideos(f)} vídeo${countVideos(f)!==1?'s':''}</span></span></button>`).join('');
+
+  const videoCards=node.videos.map(v=>videoCard(v,false)).join('');
+  const total=node.videos.length;
+
+  main.innerHTML = crumbs
+    + `<div class="topline"><h2>${escHtml(node.name)}</h2><span class="count">${total?total+' vídeo'+(total!==1?'s':''):''}</span></div>`
+    + (folderCards?`<div class="grid folders">${folderCards}</div>`:'')
+    + (videoCards?`<div class="grid">${videoCards}</div>`:'')
+    + (!folderCards&&!videoCards?`<div class="state" style="height:auto;margin-top:30px"><p>Esta carpeta está vacía.</p></div>`:'');
+
+  main.querySelectorAll('.crumbs button[data-i]').forEach(b=> b.onclick=()=> openFolder(pathNodes.slice(0, +b.dataset.i+1)));
+  main.querySelectorAll('.folder-card').forEach(b=> b.onclick=()=> openFolder([...pathNodes, node.folders[+b.dataset.fi]]));
+  bindVideoCards();
+}
+
+function countVideos(node){ let n=node.videos.length; node.folders.forEach(f=>n+=countVideos(f)); return n; }
+
+function videoCard(v, showPath){
+  const thumb=v.thumb?`<img src="${v.thumb}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
+  return `<button class="card" data-id="${v.id}" data-name="${encodeURIComponent(v.name)}" data-path="${encodeURIComponent(v.path||'')}">
+    <div class="thumb">${thumb}<span class="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E8ECF1"><path d="M8 5v14l11-7z"/></svg></span></div>
+    <div class="name">${escHtml(v.name)}</div>${showPath&&v.path?`<div class="vpath">${escHtml(v.path)}</div>`:''}</button>`;
+}
+function bindVideoCards(){ main.querySelectorAll('.card').forEach(c=> c.onclick=()=> playVideo(c.dataset.id, decodeURIComponent(c.dataset.name), decodeURIComponent(c.dataset.path||''))); }
 
 let searchTimer;
-function onSearch(value){
-  clearTimeout(searchTimer);
-  const term = value.trim();
-  if (term.length < 2) return;
-  searchTimer = setTimeout(async () => {
-    setActive(null);
-    showLoading();
-    try{
-      const { files } = await searchVideos(term);
-      renderGrid(`Resultados: “${term}”`, files);
-    }catch(e){ showError('La búsqueda falló. ' + e.message); }
-  }, 350);
+function onSearch(val){ clearTimeout(searchTimer); const term=val.trim().toLowerCase(); if(term.length<2){ return; } searchTimer=setTimeout(()=>renderSearch(term),300); }
+function renderSearch(term){
+  setActive(null); returnFn=()=>renderSearch(term);
+  const hits=flat.filter(v=> v.name.toLowerCase().includes(term));
+  if(!hits.length){ main.innerHTML=`<div class="topline"><h2>Búsqueda</h2></div><div class="state" style="height:auto;margin-top:30px"><h3>Sin resultados</h3><p>Ningún vídeo coincide con “${escHtml(term)}”.</p></div>`; return; }
+  main.innerHTML=`<div class="topline"><h2>Resultados</h2><span class="count">${hits.length} vídeo${hits.length!==1?'s':''}</span></div><div class="grid">${hits.map(v=>videoCard(v,true)).join('')}</div>`;
+  bindVideoCards();
 }
 
-function renderGrid(title, files){
-  if (!files.length){
-    main.innerHTML = `<div class="topline"><h2>${title}</h2></div>
-      <div class="state" style="height:auto;margin-top:40px"><h3>Nada por aquí</h3><p>No hay vídeos que coincidan. Prueba otro curso u otro término de búsqueda.</p></div>`;
-    return;
-  }
-  const cards = files.map(f => {
-    const thumb = f.thumbnailLink
-      ? `<img src="${f.thumbnailLink}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
-      : '';
-    return `<button class="card" data-id="${f.id}" data-name="${encodeURIComponent(f.name)}">
-      <div class="thumb">${thumb}
-        <span class="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E8ECF1"><path d="M8 5v14l11-7z"/></svg></span>
-      </div>
-      <div class="name">${f.name}</div>
-    </button>`;
-  }).join('');
-  main.innerHTML = `<div class="topline"><h2>${title}</h2><span class="count">${files.length} vídeo${files.length>1?'s':''}</span></div><div class="grid">${cards}</div>`;
-  main.querySelectorAll('.card').forEach(c => c.onclick = () => playVideo(c.dataset.id, decodeURIComponent(c.dataset.name), title));
-}
-
-function playVideo(id, name, backTitle){
-  main.innerHTML = `<div class="player">
-    <button class="backbtn" id="back">← Volver a ${backTitle}</button>
+function playVideo(id,name,path){
+  const back=returnFn;
+  main.innerHTML=`<div class="player"><button class="backbtn" id="back">← Volver</button>
     <div class="frame"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>
-    <h2>${name}</h2>
-  </div>`;
-  $('back').onclick = () => history.back();
-  history.pushState({view:'player'}, '');
+    <h2>${escHtml(name)}</h2>${path?`<div class="vpath">${escHtml(path)}</div>`:''}</div>`;
+  $('back').onclick=()=> (back||showHome)();
 }
 
-function showLoading(){ main.innerHTML = '<div class="state"><div class="spinner"></div></div>'; }
-function showError(msg){
-  main.innerHTML = `<div class="state"><h3>Algo no fue bien</h3><div class="err">${msg}</div><button class="btn" onclick="location.reload()">Reintentar</button></div>`;
-}
+function showError(msg){ main.innerHTML=`<div class="state"><h3>Algo no fue bien</h3><div class="err">${msg}</div><button class="btn" onclick="boot()">Reintentar</button></div>`; }
+function escHtml(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-/* eventos */
-$('signIn').onclick = signIn;
-$('signOut').onclick = signOut;
-$('searchBox').addEventListener('input', (e) => onSearch(e.target.value));
-window.addEventListener('popstate', () => {
-  // al pulsar atrás desde el reproductor, recargamos el último contexto simple: volver a cursos
-  const active = document.querySelector('.course.active');
-  if (active) active.click();
-});
-if (CLIENT_ID.startsWith('TU_CLIENT_ID')) $('cfgErr').classList.remove('hidden');
+$('searchBox').addEventListener('input', e=>onSearch(e.target.value));
+$('refreshBtn').onclick=()=>{ localStorage.removeItem('bc_tree_'+cfg.root()); doCrawl(); };
+$('signOut').onclick=()=>{ clearToken(); accessToken=null; hasConsented=false; showWelcome(); $('courseList').innerHTML='<div class="label">Cursos</div>'; };
+boot();
 </script>
 </body>
 </html>

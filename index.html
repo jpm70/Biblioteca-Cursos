@@ -17,40 +17,37 @@
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{
-    margin:0; background:var(--ink); color:var(--text);
-    font-family:"Inter",system-ui,sans-serif; font-size:15px; line-height:1.5;
-    display:grid; grid-template-columns:var(--side-w) 6px 1fr; height:100vh; overflow:hidden;
-  }
+  body{margin:0; background:var(--ink); color:var(--text); font-family:"Inter",system-ui,sans-serif; font-size:15px; line-height:1.5; display:grid; grid-template-columns:var(--side-w) 6px 1fr; height:100vh; overflow:hidden}
   @media (max-width:760px){ body{grid-template-columns:1fr; grid-template-rows:auto 1fr; overflow:auto; height:auto; min-height:100vh} .resizer{display:none} }
-
-  .resizer{cursor:col-resize; background:var(--border)}
-  .resizer:hover{background:var(--accent)}
+  .resizer{cursor:col-resize; background:var(--border)} .resizer:hover{background:var(--accent)}
 
   .side{background:var(--panel); border-right:1px solid var(--border); display:flex; flex-direction:column; min-height:0}
-  .brand{display:flex; align-items:center; gap:10px; padding:20px 20px 16px; border-bottom:1px solid var(--border)}
+  .brand{display:flex; align-items:center; gap:10px; padding:20px 20px 14px; border-bottom:1px solid var(--border)}
   .brand h1{font-family:"Space Grotesk",sans-serif; font-size:17px; font-weight:600; letter-spacing:-.01em; margin:0}
   .brand span{font-size:11px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
+  .tabs{display:flex; gap:6px; padding:12px 16px 0}
+  .tab{flex:1; text-align:center; padding:8px 6px; border-radius:8px; background:var(--ink); border:1px solid var(--border); color:var(--muted); cursor:pointer; font:inherit; font-size:13px; font-weight:500}
+  .tab.active{background:var(--panel-2); color:var(--accent); border-color:var(--accent)}
   .search{padding:14px 16px; border-bottom:1px solid var(--border)}
   .search input{width:100%; background:var(--ink); border:1px solid var(--border); color:var(--text); border-radius:9px; padding:10px 12px; font:inherit; outline:none}
   .search input:focus{border-color:var(--accent)}
+  .scope{display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap}
+  .scope .lab{font-size:12px; color:var(--faint)}
+  .scope button{padding:5px 11px; border-radius:7px; background:var(--ink); border:1px solid var(--border); color:var(--muted); cursor:pointer; font:inherit; font-size:12px}
+  .scope button.active{color:var(--accent); border-color:var(--accent); background:var(--panel-2)}
   .courses{flex:1; overflow:auto; padding:8px}
   .courses .label{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--faint); padding:10px 12px 6px}
   .course{display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left; background:none; border:0; color:var(--text); font:inherit; cursor:pointer; padding:9px 12px; border-radius:9px}
-  .course:hover{background:var(--panel-2)}
-  .course.active{background:var(--panel-2); color:var(--accent)}
+  .course:hover{background:var(--panel-2)} .course.active{background:var(--panel-2); color:var(--accent)}
   .course svg{flex:0 0 auto; opacity:.7; margin-top:2px}
   .course span{overflow-wrap:anywhere; line-height:1.35}
   .side-foot{padding:14px 16px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
-  .linkbtn{background:none;border:0;color:var(--accent);font:inherit;cursor:pointer;padding:0}
-  .linkbtn:hover{text-decoration:underline}
+  .linkbtn{background:none;border:0;color:var(--accent);font:inherit;cursor:pointer;padding:0} .linkbtn:hover{text-decoration:underline}
 
   .main{min-height:0; overflow:auto; padding:24px 32px 48px}
   .crumbs{display:flex; align-items:center; gap:6px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin-bottom:18px}
-  .crumbs button{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:0}
-  .crumbs button:hover{color:var(--accent)}
-  .crumbs .sep{color:var(--faint)}
-  .crumbs .cur{color:var(--text)}
+  .crumbs button{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:0} .crumbs button:hover{color:var(--accent)}
+  .crumbs .sep{color:var(--faint)} .crumbs .cur{color:var(--text)}
   .topline{display:flex; align-items:baseline; gap:14px; margin-bottom:18px; flex-wrap:wrap}
   .topline h2{font-family:"Space Grotesk",sans-serif; font-size:23px; font-weight:600; letter-spacing:-.02em; margin:0}
   .topline .count{color:var(--muted); font-size:13px}
@@ -61,7 +58,7 @@
   .card:hover{border-color:var(--accent); transform:translateY(-2px)}
   .thumb{aspect-ratio:16/9; background:var(--panel-2); position:relative; display:flex; align-items:center; justify-content:center}
   .thumb img{width:100%; height:100%; object-fit:cover; display:block}
-  .thumb .play{position:absolute; width:44px; height:44px; border-radius:50%; background:rgba(20,24,31,.7); display:flex; align-items:center; justify-content:center}
+  .thumb .badge{position:absolute; width:44px; height:44px; border-radius:50%; background:rgba(20,24,31,.7); display:flex; align-items:center; justify-content:center}
   .card .name{padding:11px 13px; font-size:14px; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
   .card .vpath{padding:0 13px 11px; font-size:12px; color:var(--faint); margin-top:-4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
   .folder-card{display:flex; align-items:center; gap:12px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer; text-align:left; color:inherit; font:inherit; padding:14px 15px; transition:border-color .15s, transform .15s}
@@ -74,35 +71,37 @@
   .backbtn{background:none;border:1px solid var(--border);color:var(--muted);font:inherit;cursor:pointer;border-radius:8px;padding:7px 12px;margin-bottom:16px}
   .backbtn:hover{color:var(--text);border-color:var(--accent)}
   .frame{aspect-ratio:16/9; width:100%; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); background:#000}
+  .frame.tall{aspect-ratio:auto; height:82vh}
   .frame iframe{width:100%; height:100%; border:0}
   .player h2{font-family:"Space Grotesk",sans-serif; font-weight:600; margin:18px 0 4px; letter-spacing:-.01em}
   .player .vpath{color:var(--muted); font-size:13px}
+  .player .actions{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
 
   .state{display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; gap:14px; padding:40px}
   .state h3{font-family:"Space Grotesk",sans-serif; font-weight:600; margin:0; font-size:20px}
   .state p{color:var(--muted); margin:0; max-width:440px}
-  .btn{background:var(--accent); color:#1A140A; border:0; border-radius:10px; font:inherit; font-weight:600; padding:11px 20px; cursor:pointer}
-  .btn:hover{background:var(--accent-press)} .btn:active{transform:translateY(1px)}
+  .btn{background:var(--accent); color:#1A140A; border:0; border-radius:10px; font:inherit; font-weight:600; padding:11px 20px; cursor:pointer; text-decoration:none; display:inline-block}
+  .btn.ghost{background:none; color:var(--text); border:1px solid var(--border)} .btn.ghost:hover{border-color:var(--accent)}
+  .btn:hover{background:var(--accent-press)} .btn.ghost:hover{background:none} .btn:active{transform:translateY(1px)}
   .err{color:#E98F8F; background:rgba(233,143,143,.08); border:1px solid rgba(233,143,143,.25); border-radius:10px; padding:12px 14px; font-size:14px; max-width:520px}
   .spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .hidden{display:none!important}
-  ::-webkit-scrollbar{width:10px;height:10px}
-  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
+  ::-webkit-scrollbar{width:10px;height:10px} ::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
 </style>
 </head>
 <body>
 
   <aside class="side">
     <div class="brand">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <rect x="2.5" y="4" width="19" height="14" rx="2.5" stroke="#E0A458" stroke-width="1.6"/>
-        <path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/>
-        <path d="M6 21h12" stroke="#E0A458" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      <div><h1>Biblioteca</h1><span>cursos en vídeo</span></div>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4" width="19" height="14" rx="2.5" stroke="#E0A458" stroke-width="1.6"/><path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/><path d="M6 21h12" stroke="#E0A458" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div><h1>Biblioteca</h1><span>cursos</span></div>
     </div>
-    <div class="search"><input id="searchBox" type="search" placeholder="Buscar en todos los cursos…" autocomplete="off" disabled></div>
+    <div class="tabs hidden" id="tabs"></div>
+    <div class="search">
+      <input id="searchBox" type="search" placeholder="Buscar…" autocomplete="off" disabled>
+      <div class="scope hidden" id="scope"></div>
+    </div>
     <nav class="courses" id="courseList"><div class="label">Cursos</div></nav>
     <div class="side-foot">
       <span id="userState">Sin conectar</span>
@@ -114,35 +113,36 @@
   </aside>
 
   <div class="resizer" id="resizer" title="Arrastra para redimensionar"></div>
-
   <main class="main" id="main"></main>
 
 <script>
-/* ======================= AJUSTES (rellena una vez) =======================
-   No son secretos: el Client ID va siempre en el navegador y el ID de
-   carpeta no da acceso por sí solo. Ponlos aquí y todos tus usuarios
-   abren la URL sin configurar nada.                                         */
-const HARD_CLIENT_ID = '314287805294-tva4np726d008slj2nlnd453ndvej7rg.apps.googleusercontent.com';   // p.ej. '123-abc.apps.googleusercontent.com'
-const HARD_ROOT      = '1Y14IDhkE5n-s0WZrDDlyWb-X_Yqra_aQ';   // ID de tu carpeta compartida de cursos
+/* ======================= AJUSTES (rellena una vez) ======================= */
+const HARD_CLIENT_ID  = '314287805294-tva4np726d008slj2nlnd453ndvej7rg.apps.googleusercontent.com';   // '123-abc.apps.googleusercontent.com'
+const HARD_ROOT_VIDEO = '1Y14IDhkE5n-s0WZrDDlyWb-X_Yqra_aQ';   // ID de la carpeta compartida de cursos en VÍDEO
+const HARD_ROOT_PDF   = '1wDYxjmWftxmqG9G-WS_m7xg890bCVplP';   // ID de la carpeta compartida de cursos en PDF (opcional)
 const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 /* ========================================================================= */
 
+const MODES = [];
+if(HARD_ROOT_VIDEO.trim()) MODES.push({key:'video', label:'Vídeos', root:HARD_ROOT_VIDEO.trim(), clause:"mimeType contains 'video/'", kind:'video'});
+if(HARD_ROOT_PDF.trim())   MODES.push({key:'pdf',   label:'PDF',    root:HARD_ROOT_PDF.trim(),   clause:"mimeType='application/pdf'", kind:'pdf'});
+
 const $ = (id) => document.getElementById(id);
 const main = $('main');
-const cfg = { clientId:()=> HARD_CLIENT_ID.trim(), root:()=> (HARD_ROOT.trim() || 'root') };
+const clientId = () => HARD_CLIENT_ID.trim();
+const modeOf = (key) => MODES.find(m=>m.key===key);
 
-let tree = null;       // árbol completo de la biblioteca
-let flat = [];         // índice plano de vídeos para buscar
-let currentPath = [];  // pila de nodos para navegar
-let returnFn = null;   // a dónde vuelve el botón del reproductor
+const state = {};          // {modeKey:{tree,flat}}
+let activeMode = MODES[0] || null;   // pestaña de navegación
+let searchScope = activeMode ? activeMode.key : null;  // ámbito de búsqueda
+let tree=null, flat=[], currentPath=[], returnFn=null, searching=false;
 
 /* ---------- token persistente ---------- */
 function saveToken(t,s){ localStorage.setItem('bc_token', JSON.stringify({t, e:Date.now()+(s||3600)*1000})); }
 function loadToken(){ try{ const o=JSON.parse(localStorage.getItem('bc_token')); if(o && o.e-Date.now()>60000) return o.t; }catch(e){} return null; }
 function clearToken(){ localStorage.removeItem('bc_token'); }
-/* ---------- caché del árbol ---------- */
-function cacheTree(t){ try{ localStorage.setItem('bc_tree_'+cfg.root(), JSON.stringify(t)); }catch(e){} }
-function loadCachedTree(){ try{ return JSON.parse(localStorage.getItem('bc_tree_'+cfg.root())); }catch(e){ return null; } }
+function cacheTree(root,t){ try{ localStorage.setItem('bc_tree_'+root, JSON.stringify(t)); }catch(e){} }
+function loadCachedTree(root){ try{ return JSON.parse(localStorage.getItem('bc_tree_'+root)); }catch(e){ return null; } }
 
 /* ---------- barra lateral redimensionable ---------- */
 (()=>{ const w=localStorage.getItem('bc_side_w'); if(w) document.documentElement.style.setProperty('--side-w', w); })();
@@ -152,20 +152,18 @@ function loadCachedTree(){ try{ return JSON.parse(localStorage.getItem('bc_tree_
   window.addEventListener('pointerup', ()=>{ if(!drag) return; drag=false; document.body.style.userSelect=''; localStorage.setItem('bc_side_w', getComputedStyle(document.documentElement).getPropertyValue('--side-w').trim()); });
 })();
 
-/* ---------- OAuth (GIS, modelo token) ---------- */
+/* ---------- OAuth (GIS) ---------- */
 let tokenClient=null, accessToken=null, hasConsented=false, pending=null;
 function whenGisReady(cb){ const t=setInterval(()=>{ if(window.google&&google.accounts){ clearInterval(t); cb(); } },100); }
 function initTokenClient(){
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: cfg.clientId(), scope: SCOPES,
+  tokenClient = google.accounts.oauth2.initTokenClient({ client_id: clientId(), scope: SCOPES,
     callback:(r)=>{ if(r.error){ if(pending){pending.reject(r); pending=null;} return; }
       accessToken=r.access_token; hasConsented=true; saveToken(r.access_token, r.expires_in);
-      const p=pending; pending=null; if(p) p.resolve(); },
-  });
+      const p=pending; pending=null; if(p) p.resolve(); } });
 }
 function requestToken(silent){ return new Promise((res,rej)=>{ pending={resolve:res,reject:rej}; tokenClient.requestAccessToken({prompt: silent?'':(hasConsented?'':'consent')}); }); }
 
-/* ---------- Drive API + límite de concurrencia ---------- */
+/* ---------- Drive API ---------- */
 async function drive(params, retry=true){
   const url=new URL('https://www.googleapis.com/drive/v3/files');
   Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
@@ -177,43 +175,54 @@ async function drive(params, retry=true){
 function limiter(max){ let active=0; const q=[]; const next=()=>{ if(active>=max||!q.length) return; active++; const {fn,res,rej}=q.shift(); fn().then(res,rej).finally(()=>{active--; next();}); }; return fn=>new Promise((res,rej)=>{ q.push({fn,res,rej}); next(); }); }
 const limit = limiter(6);
 
-async function listChildren(folderId){
-  const folders=[], videos=[]; let pageToken;
+async function listChildren(folderId, clause){
+  const folders=[], items=[]; let pageToken;
   do{
-    const params={ q:`'${folderId}' in parents and trashed=false and (mimeType='application/vnd.google-apps.folder' or mimeType contains 'video/')`,
+    const params={ q:`'${folderId}' in parents and trashed=false and (mimeType='application/vnd.google-apps.folder' or ${clause})`,
       fields:'nextPageToken, files(id,name,mimeType,thumbnailLink)', orderBy:'folder,name', pageSize:'1000' };
     if(pageToken) params.pageToken=pageToken;
     const r=await drive(params);
     for(const f of (r.files||[])){
       if(f.mimeType==='application/vnd.google-apps.folder') folders.push({id:f.id,name:f.name});
-      else videos.push({id:f.id,name:f.name,thumb:f.thumbnailLink});
+      else items.push({id:f.id,name:f.name,thumb:f.thumbnailLink});
     }
     pageToken=r.nextPageToken;
   } while(pageToken);
-  return {folders,videos};
+  return {folders, items};
 }
-
 let crawled=0;
-async function crawl(id,name){
-  const {folders,videos}=await limit(()=>listChildren(id));
+async function crawl(id,name,clause){
+  const {folders,items}=await limit(()=>listChildren(id,clause));
   crawled++; const el=$('crawlStatus'); if(el) el.textContent=`Indexando… ${crawled} carpetas`;
-  const node={id,name,videos,folders:[]};
-  node.folders=await Promise.all(folders.map(f=>crawl(f.id,f.name)));
+  const node={id,name,items,folders:[]};
+  node.folders=await Promise.all(folders.map(f=>crawl(f.id,f.name,clause)));
   return node;
 }
 function buildIndex(node, path, out){
-  for(const v of node.videos) out.push({id:v.id, name:v.name, thumb:v.thumb, path:path.join(' / ')});
+  for(const it of node.items) out.push({id:it.id, name:it.name, thumb:it.thumb, path:path.join(' / ')});
   for(const f of node.folders) buildIndex(f,[...path,f.name],out);
   return out;
 }
+function countItems(node){ let n=node.items.length; node.folders.forEach(f=>n+=countItems(f)); return n; }
+function itemWord(n, kind){ return kind==='pdf' ? `${n} PDF` : `${n} vídeo${n!==1?'s':''}`; }
+
+async function ensureData(mode){
+  if(state[mode.key]) return;
+  const cached=loadCachedTree(mode.root);
+  if(cached){ state[mode.key]={tree:cached, flat:buildIndex(cached,[],[])}; return; }
+  crawled=0;
+  const t=await crawl(mode.root, mode.label, mode.clause);
+  cacheTree(mode.root,t); state[mode.key]={tree:t, flat:buildIndex(t,[],[])};
+}
+function spinner(text){ return `<div class="state"><div class="spinner"></div><p id="crawlStatus">${text}</p></div>`; }
 
 /* ---------- flujo ---------- */
 function boot(){
-  if(!cfg.clientId()){ main.innerHTML=`<div class="state"><h3>Falta configurar la app</h3><div class="err">El desarrollador debe rellenar <b>HARD_CLIENT_ID</b> (y <b>HARD_ROOT</b>) en el archivo.</div></div>`; return; }
+  if(!clientId() || !MODES.length){ main.innerHTML=`<div class="state"><h3>Falta configurar la app</h3><div class="err">El desarrollador debe rellenar <b>HARD_CLIENT_ID</b> y al menos <b>HARD_ROOT_VIDEO</b> en el archivo.</div></div>`; return; }
   whenGisReady(()=>{ initTokenClient(); const t=loadToken(); if(t){ accessToken=t; hasConsented=true; onSignedIn(); } else showWelcome(); });
 }
 function showWelcome(){
-  $('userState').textContent='Sin conectar'; $('signOut').classList.add('hidden'); $('refreshBtn').classList.add('hidden'); $('searchBox').disabled=true;
+  $('userState').textContent='Sin conectar'; $('signOut').classList.add('hidden'); $('refreshBtn').classList.add('hidden'); $('tabs').classList.add('hidden'); $('scope').classList.add('hidden'); $('searchBox').disabled=true;
   main.innerHTML=`<div class="state">
     <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4" width="19" height="14" rx="2.5" stroke="#E0A458" stroke-width="1.4"/><path d="M10 8.5l4.5 2.5L10 13.5v-5z" fill="#E0A458"/></svg>
     <h3>Accede para ver los cursos</h3>
@@ -221,18 +230,33 @@ function showWelcome(){
     <button class="btn" id="connectBtn">Acceder con Google</button></div>`;
   $('connectBtn').onclick=()=> requestToken(false).then(onSignedIn).catch(()=> showError('No se pudo acceder. Revisa que tu cuenta tenga acceso y esté autorizada.'));
 }
-async function onSignedIn(){
+function onSignedIn(){
   $('userState').textContent='Conectado'; $('signOut').classList.remove('hidden'); $('refreshBtn').classList.remove('hidden'); $('searchBox').disabled=false;
-  const cached=loadCachedTree();
-  if(cached){ useTree(cached); } else { await doCrawl(); }
+  renderTabs(); renderScope();
+  ensureMode(activeMode);
 }
-async function doCrawl(){
-  main.innerHTML=`<div class="state"><div class="spinner"></div><p id="crawlStatus">Indexando biblioteca…</p></div>`;
-  crawled=0;
-  try{ const t=await crawl(cfg.root(),'Cursos'); cacheTree(t); useTree(t); }
-  catch(e){ showError('No se pudo leer la biblioteca. '+e.message); }
+function renderTabs(){
+  const c=$('tabs');
+  if(MODES.length<2){ c.classList.add('hidden'); return; }
+  c.classList.remove('hidden');
+  c.innerHTML=MODES.map(m=>`<button class="tab${m.key===activeMode.key?' active':''}" data-k="${m.key}">${m.label}</button>`).join('');
+  c.querySelectorAll('.tab').forEach(b=> b.onclick=()=>{ const m=modeOf(b.dataset.k); if(m.key!==activeMode.key) ensureMode(m); });
 }
-function useTree(t){ tree=t; flat=buildIndex(t,[],[]); renderSidebar(); showHome(); }
+function renderScope(){
+  const c=$('scope');
+  if(MODES.length<2){ c.classList.add('hidden'); return; }
+  c.classList.remove('hidden');
+  c.innerHTML=`<span class="lab">Buscar en:</span>`+MODES.map(m=>`<button class="${m.key===searchScope?'active':''}" data-k="${m.key}">${m.label}</button>`).join('');
+  c.querySelectorAll('button[data-k]').forEach(b=> b.onclick=()=>{ searchScope=b.dataset.k; renderScope(); const term=$('searchBox').value.trim(); if(term.length>=2) runSearch(term); });
+}
+async function ensureMode(mode){
+  activeMode=mode; searchScope=mode.key; renderTabs(); renderScope();
+  $('searchBox').value=''; searching=false;
+  $('searchBox').placeholder = mode.kind==='pdf' ? 'Buscar PDF…' : 'Buscar vídeos…';
+  if(!state[mode.key]) main.innerHTML=spinner(`Indexando ${mode.label.toLowerCase()}…`);
+  try{ await ensureData(mode); }catch(e){ showError('No se pudo leer la biblioteca. '+e.message); return; }
+  tree=state[mode.key].tree; flat=state[mode.key].flat; renderSidebar(); showHome();
+}
 
 function renderSidebar(){
   const list=$('courseList'); list.innerHTML='<div class="label">Cursos</div>';
@@ -246,79 +270,84 @@ function renderSidebar(){
   });
 }
 function setActive(btn){ document.querySelectorAll('.course').forEach(c=>c.classList.remove('active')); if(btn) btn.classList.add('active'); }
-
-function showHome(){
-  setActive(null); currentPath=[]; returnFn=showHome;
-  main.innerHTML=`<div class="state"><h3>Elige un curso</h3><p>Selecciona un curso a la izquierda para ver sus carpetas y vídeos, o busca por nombre en toda la biblioteca.</p></div>`;
-}
+function showHome(){ setActive(null); currentPath=[]; searching=false; returnFn=showHome;
+  main.innerHTML=`<div class="state"><h3>Elige un curso</h3><p>Selecciona un curso a la izquierda para ver sus carpetas y archivos, o busca por nombre.</p></div>`; }
 
 function openFolder(pathNodes, sidebarBtn){
-  currentPath=pathNodes; returnFn=()=>openFolder(pathNodes);
+  currentPath=pathNodes; searching=false; returnFn=()=>openFolder(pathNodes);
   if(sidebarBtn) setActive(sidebarBtn);
-  else { // marcar el curso raíz de esta ruta como activo en la barra
-    const rootName=pathNodes[0].name;
-    document.querySelectorAll('.course').forEach(c=>c.classList.toggle('active', c.title===rootName));
-  }
-  const node=pathNodes[pathNodes.length-1];
+  else { const rootName=pathNodes[0].name; document.querySelectorAll('.course').forEach(c=>c.classList.toggle('active', c.title===rootName)); }
+  const node=pathNodes[pathNodes.length-1], kind=activeMode.kind;
 
-  // migas de pan
   let crumbs=`<div class="crumbs"><button onclick="showHome()">Cursos</button>`;
-  pathNodes.forEach((n,i)=>{ const last=i===pathNodes.length-1;
-    crumbs+=`<span class="sep">/</span>`+(last?`<span class="cur">${escHtml(n.name)}</span>`:`<button data-i="${i}">${escHtml(n.name)}</button>`);
-  });
+  pathNodes.forEach((n,i)=>{ const last=i===pathNodes.length-1; crumbs+=`<span class="sep">/</span>`+(last?`<span class="cur">${escHtml(n.name)}</span>`:`<button data-i="${i}">${escHtml(n.name)}</button>`); });
   crumbs+=`</div>`;
 
   const folderCards=node.folders.map((f,i)=>`<button class="folder-card" data-fi="${i}">
     <span class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.6"/></svg></span>
-    <span><span class="fc-name">${escHtml(f.name)}</span><br><span class="fc-sub">${countVideos(f)} vídeo${countVideos(f)!==1?'s':''}</span></span></button>`).join('');
-
-  const videoCards=node.videos.map(v=>videoCard(v,false)).join('');
-  const total=node.videos.length;
+    <span><span class="fc-name">${escHtml(f.name)}</span><br><span class="fc-sub">${itemWord(countItems(f),kind)}</span></span></button>`).join('');
+  const itemCards=node.items.map(v=>card(v,false,kind)).join('');
+  const total=node.items.length;
 
   main.innerHTML = crumbs
-    + `<div class="topline"><h2>${escHtml(node.name)}</h2><span class="count">${total?total+' vídeo'+(total!==1?'s':''):''}</span></div>`
+    + `<div class="topline"><h2>${escHtml(node.name)}</h2><span class="count">${total?itemWord(total,kind):''}</span></div>`
     + (folderCards?`<div class="grid folders">${folderCards}</div>`:'')
-    + (videoCards?`<div class="grid">${videoCards}</div>`:'')
-    + (!folderCards&&!videoCards?`<div class="state" style="height:auto;margin-top:30px"><p>Esta carpeta está vacía.</p></div>`:'');
+    + (itemCards?`<div class="grid">${itemCards}</div>`:'')
+    + (!folderCards&&!itemCards?`<div class="state" style="height:auto;margin-top:30px"><p>Esta carpeta está vacía.</p></div>`:'');
 
   main.querySelectorAll('.crumbs button[data-i]').forEach(b=> b.onclick=()=> openFolder(pathNodes.slice(0, +b.dataset.i+1)));
   main.querySelectorAll('.folder-card').forEach(b=> b.onclick=()=> openFolder([...pathNodes, node.folders[+b.dataset.fi]]));
-  bindVideoCards();
+  bindCards();
 }
 
-function countVideos(node){ let n=node.videos.length; node.folders.forEach(f=>n+=countVideos(f)); return n; }
-
-function videoCard(v, showPath){
+function card(v, showPath, kind){
   const thumb=v.thumb?`<img src="${v.thumb}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
-  return `<button class="card" data-id="${v.id}" data-name="${encodeURIComponent(v.name)}" data-path="${encodeURIComponent(v.path||'')}">
-    <div class="thumb">${thumb}<span class="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E8ECF1"><path d="M8 5v14l11-7z"/></svg></span></div>
+  const icon = kind==='pdf'
+    ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="#E8ECF1" stroke-width="1.6"/><path d="M14 3v4h4" stroke="#E8ECF1" stroke-width="1.6"/></svg>`
+    : `<svg width="18" height="18" viewBox="0 0 24 24" fill="#E8ECF1"><path d="M8 5v14l11-7z"/></svg>`;
+  return `<button class="card" data-id="${v.id}" data-name="${encodeURIComponent(v.name)}" data-path="${encodeURIComponent(v.path||'')}" data-kind="${kind}">
+    <div class="thumb">${thumb}<span class="badge">${icon}</span></div>
     <div class="name">${escHtml(v.name)}</div>${showPath&&v.path?`<div class="vpath">${escHtml(v.path)}</div>`:''}</button>`;
 }
-function bindVideoCards(){ main.querySelectorAll('.card').forEach(c=> c.onclick=()=> playVideo(c.dataset.id, decodeURIComponent(c.dataset.name), decodeURIComponent(c.dataset.path||''))); }
+function bindCards(){ main.querySelectorAll('.card').forEach(c=> c.onclick=()=> openItem(c.dataset.id, decodeURIComponent(c.dataset.name), decodeURIComponent(c.dataset.path||''), c.dataset.kind)); }
 
 let searchTimer;
-function onSearch(val){ clearTimeout(searchTimer); const term=val.trim().toLowerCase(); if(term.length<2){ return; } searchTimer=setTimeout(()=>renderSearch(term),300); }
-function renderSearch(term){
-  setActive(null); returnFn=()=>renderSearch(term);
-  const hits=flat.filter(v=> v.name.toLowerCase().includes(term));
-  if(!hits.length){ main.innerHTML=`<div class="topline"><h2>Búsqueda</h2></div><div class="state" style="height:auto;margin-top:30px"><h3>Sin resultados</h3><p>Ningún vídeo coincide con “${escHtml(term)}”.</p></div>`; return; }
-  main.innerHTML=`<div class="topline"><h2>Resultados</h2><span class="count">${hits.length} vídeo${hits.length!==1?'s':''}</span></div><div class="grid">${hits.map(v=>videoCard(v,true)).join('')}</div>`;
-  bindVideoCards();
+function onSearch(val){
+  clearTimeout(searchTimer);
+  const term=val.trim();
+  if(term.length<2){ if(searching){ if(currentPath.length) openFolder(currentPath); else showHome(); } return; }
+  searchTimer=setTimeout(()=>runSearch(term),300);
+}
+async function runSearch(term){
+  searching=true; setActive(null);
+  const mode=modeOf(searchScope), low=term.toLowerCase();
+  returnFn=()=>runSearch(term);
+  if(!state[mode.key]){ main.innerHTML=spinner(`Indexando ${mode.label.toLowerCase()}…`); try{ await ensureData(mode); }catch(e){ showError('No se pudo indexar. '+e.message); return; } }
+  const hits=state[mode.key].flat.filter(v=> v.name.toLowerCase().includes(low));
+  if(!hits.length){ main.innerHTML=`<div class="topline"><h2>Búsqueda en ${mode.label}</h2></div><div class="state" style="height:auto;margin-top:30px"><h3>Sin resultados</h3><p>Ningún ${mode.kind==='pdf'?'PDF':'vídeo'} coincide con “${escHtml(term)}”.</p></div>`; return; }
+  main.innerHTML=`<div class="topline"><h2>Resultados en ${mode.label}</h2><span class="count">${itemWord(hits.length,mode.kind)}</span></div><div class="grid">${hits.map(v=>card(v,true,mode.kind)).join('')}</div>`;
+  bindCards();
 }
 
-function playVideo(id,name,path){
+function openItem(id,name,path,kind){
   const back=returnFn;
+  let actions='';
+  if(kind==='pdf'){
+    const dl=`https://drive.google.com/uc?export=download&id=${id}`;
+    const open=`https://drive.google.com/file/d/${id}/view`;
+    actions=`<div class="actions"><a class="btn" href="${dl}" target="_blank" rel="noopener">Descargar PDF</a><a class="btn ghost" href="${open}" target="_blank" rel="noopener">Abrir en Drive</a></div>`;
+  }
   main.innerHTML=`<div class="player"><button class="backbtn" id="back">← Volver</button>
-    <div class="frame"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>
-    <h2>${escHtml(name)}</h2>${path?`<div class="vpath">${escHtml(path)}</div>`:''}</div>`;
-  $('back').onclick=()=> (back||showHome)();
+    <div class="frame${kind==='pdf'?' tall':''}"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>
+    <h2>${escHtml(name)}</h2>${path?`<div class="vpath">${escHtml(path)}</div>`:''}${actions}</div>`;
+  $('back').onclick=()=>(back||showHome)();
 }
 
 function showError(msg){ main.innerHTML=`<div class="state"><h3>Algo no fue bien</h3><div class="err">${msg}</div><button class="btn" onclick="boot()">Reintentar</button></div>`; }
 function escHtml(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 $('searchBox').addEventListener('input', e=>onSearch(e.target.value));
-$('refreshBtn').onclick=()=>{ localStorage.removeItem('bc_tree_'+cfg.root()); doCrawl(); };
+$('refreshBtn').onclick=()=>{ localStorage.removeItem('bc_tree_'+activeMode.root); delete state[activeMode.key]; ensureMode(activeMode); };
 $('signOut').onclick=()=>{ clearToken(); accessToken=null; hasConsented=false; showWelcome(); $('courseList').innerHTML='<div class="label">Cursos</div>'; };
 boot();
 </script>
